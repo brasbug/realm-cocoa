@@ -33,8 +33,9 @@ namespace realm {
     typedef util::bind_ptr<LinkView> LinkViewRef;
 }
 
-@class RLMObjectSchema;
 @class RLMObjectBase;
+@class RLMObjectSchema;
+class RLMObservationInfo;
 
 @interface RLMArray () {
   @protected
@@ -59,6 +60,9 @@ namespace realm {
 // deletes all objects in the RLMArray from their containing realms
 - (void)deleteObjectsFromRealm;
 @end
+
+// Initialize the observation info for an array if needed
+void RLMEnsureArrayObservationInfo(std::unique_ptr<RLMObservationInfo>& info, NSString *keyPath, RLMArray *array, id observed);
 
 
 //
