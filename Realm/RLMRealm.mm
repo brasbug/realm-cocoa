@@ -20,7 +20,7 @@
 
 #import "RLMArray_Private.hpp"
 #import "RLMMigration_Private.h"
-#import "RLMNotification.hpp"
+#import "RLMObservation.hpp"
 #import "RLMObjectSchema_Private.hpp"
 #import "RLMObjectStore.h"
 #import "RLMObject_Private.h"
