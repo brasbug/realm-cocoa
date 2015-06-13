@@ -20,11 +20,11 @@
 
 #import "RLMArray_Private.hpp"
 #import "RLMMigration_Private.h"
-#import "RLMObservation.hpp"
 #import "RLMObjectSchema_Private.hpp"
 #import "RLMObjectStore.h"
 #import "RLMObject_Private.h"
 #import "RLMObject_Private.hpp"
+#import "RLMObservation.hpp"
 #import "RLMProperty.h"
 #import "RLMQueryUtil.hpp"
 #import "RLMRealmUtil.h"
@@ -611,9 +611,19 @@ static void CheckReadWrite(RLMRealm *realm, NSString *msg=@"Cannot write to a re
         return;
     }
 
+    for (RLMObjectSchema *objectSchema in _schema.objectSchema) {
+        for (RLMObservationInfo *info : objectSchema->_observedObjects) {
+            info->willChange(RLMInvalidatedKey);
+            info->prepareForInvalidation();
+        }
+    }
+
     _sharedGroup->end_read();
     _group = nullptr;
     for (RLMObjectSchema *objectSchema in _schema.objectSchema) {
+        for (RLMObservationInfo *info : objectSchema->_observedObjects) {
+            info->didChange(RLMInvalidatedKey);
+        }
         objectSchema.table = nullptr;
     }
 }
