@@ -749,6 +749,10 @@ id RLMDynamicGet(__unsafe_unretained RLMObjectBase *obj, __unsafe_unretained NSS
                             @{@"Property name:" : propName ?: @"nil",
                               @"Class name": obj->_objectSchema.className});
     }
+    return RLMDynamicGet(obj, prop);
+}
+
+id RLMDynamicGet(__unsafe_unretained RLMObjectBase *obj, __unsafe_unretained RLMProperty *prop) {
     NSUInteger col = prop.column;
     switch (accessorCodeForType(prop.objcType, prop.type)) {
         case RLMAccessorCodeByte:     return @((char)RLMGetLong(obj, col));
