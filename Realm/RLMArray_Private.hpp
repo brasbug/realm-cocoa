@@ -55,7 +55,8 @@ class RLMObservationInfo;
 + (RLMArrayLinkView *)arrayWithObjectClassName:(NSString *)objectClassName
                                           view:(realm::LinkViewRef)view
                                          realm:(RLMRealm *)realm
-                                           key:(NSString *)key;
+                                           key:(NSString *)key
+                                  parentSchema:(RLMObjectSchema *)parentSchema;
 
 // deletes all objects in the RLMArray from their containing realms
 - (void)deleteObjectsFromRealm;
