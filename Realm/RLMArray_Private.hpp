@@ -62,6 +62,8 @@ class RLMObservationInfo;
 - (void)deleteObjectsFromRealm;
 @end
 
+void RLMValidateArrayObservationKey(NSString *keyPath, RLMArray *array);
+
 // Initialize the observation info for an array if needed
 void RLMEnsureArrayObservationInfo(std::unique_ptr<RLMObservationInfo>& info, NSString *keyPath, RLMArray *array, id observed);
 
